@@ -1,0 +1,81 @@
+from flask import Flask, request, jsonify
+
+import requests
+
+import openai
+
+
+
+app = Flask(__name__)
+
+
+
+# Google Search API Key & Custom Search Engine ID
+
+GOOGLE_API_KEY = "YOUR_GOOGLE_API_KEY"
+
+SEARCH_ENGINE_ID = "YOUR_SEARCH_ENGINE_ID"
+
+
+
+# OpenAI API Key
+
+OPENAI_API_KEY = "YOUR_OPENAI_API_KEY"
+
+
+
+def search_google(query):
+
+    url = f"https://www.googleapis.com/customsearch/v1?q={query}&key={GOOGLE_API_KEY}&cx={SEARCH_ENGINE_ID}"
+
+    response = requests.get(url)
+
+    data = response.json()
+
+    search_results = data.get("items", [])
+
+    content = " ".join([item["snippet"] for item in search_results[:3]])  # Extract snippets
+
+    return content
+
+
+
+def generate_ai_response(user_query):
+
+    search_content = search_google(user_query)  # Get website info
+
+    prompt = f"User asked: {user_query}. Based on the extracted info: {search_content}, provide a response."
+
+    
+
+    response = openai.ChatCompletion.create(
+
+        model="gpt-3.5-turbo",
+
+        messages=[{"role": "system", "content": "You are an AI assistant providing website-based answers."},
+
+                  {"role": "user", "content": prompt}]
+
+    )
+
+    return response["choices"][0]["message"]["content"]
+
+
+
+@app.route('/chatbot', methods=['POST'])
+
+def chatbot():
+
+    data = request.get_json()
+
+    user_query = data.get("query", "")
+
+    ai_response = generate_ai_response(user_query)
+
+    return jsonify({"response": ai_response})
+
+
+
+if __name__ == "__main__":
+
+    app.run(debug=True)
