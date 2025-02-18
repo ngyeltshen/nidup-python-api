@@ -1,4 +1,4 @@
-from app import app  # Assuming your Flask file is named app.py
+from app import app  # Import the Flask app from app.py
 
-if __name__ == "__main__":
-    app.run()
+if __name__ != "__main__":
+    application = app  # Assign Flask app to 'application' for Gunicorn
