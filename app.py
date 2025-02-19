@@ -28,7 +28,7 @@ def search_google(query):
 def generate_ai_response(user_query):
     """Generate response using Hugging Face API"""
     search_content = search_google(user_query)  # Get relevant website content
-    prompt = f"User asked: {user_query}. Based on extracted info: {search_content}, provide an answer."
+    #prompt = f"User asked: {user_query}. Based on extracted info: {search_content}, provide an answer."
 
     headers = {
         "Authorization": f"Bearer {HUGGINGFACE_API_KEY}",
