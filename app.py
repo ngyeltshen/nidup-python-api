@@ -1,14 +1,16 @@
 import os
 from flask import Flask, request, jsonify
 import requests
-import openai
 
 app = Flask(__name__)
 
 # Get API keys from environment variables
 GOOGLE_API_KEY = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
-SEARCH_ENGINE_ID = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
-OPENAI_API_KEY = os.environ.get("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")
+SEARCH_ENGINE_ID = os.environ.get("101ec59658da64424")
+HUGGINGFACE_API_KEY = os.environ.get("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")  # Hugging Face API key
+
+# Hugging Face model
+HF_MODEL = "mistralai/Mistral-7B-Instruct"
 
 def search_google(query):
     """Search Google using Custom Search API"""
@@ -20,17 +22,32 @@ def search_google(query):
     return "No relevant information found."
 
 def generate_ai_response(user_query):
-    """Generate response using OpenAI API"""
+    """Generate response using Hugging Face API"""
     search_content = search_google(user_query)  # Get relevant website content
     prompt = f"User asked: {user_query}. Based on extracted info: {search_content}, provide an answer."
 
+    headers = {
+        "Authorization": f"Bearer {HUGGINGFACE_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "inputs": prompt,
+        "parameters": {"max_new_tokens": 200}  # Limit tokens to keep responses concise
+    }
+
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": "system", "content": "You are a helpful AI assistant."},
-                      {"role": "user", "content": prompt}]
+        response = requests.post(
+            f"https://api-inference.huggingface.co/models/{HF_MODEL}",
+            headers=headers,
+            json=data
         )
-        return response["choices"][0]["message"]["content"]
+        response_json = response.json()
+
+        if "error" in response_json:
+            return f"Error from Hugging Face API: {response_json['error']}"
+
+        return response_json[0]["generated_text"]  # Extract generated text
+
     except Exception as e:
         return f"Error generating AI response: {str(e)}"
 
@@ -45,3 +62,4 @@ def chatbot():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # Get port from environment
     app.run(debug=True, host='0.0.0.0', port=port)  # Run Flask server on all interfaces
+  
