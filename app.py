@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Get API keys from environment variables
 GOOGLE_API_KEY = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
 SEARCH_ENGINE_ID = os.environ.get("101ec59658da64424")
-HUGGINGFACE_API_KEY = os.environ.get("HUGGINFACE_API_KEY")  # Hugging Face API key
+HUGGINGFACE_API_KEY = os.environ.get("HUGGINGFACE_API_KEY")  # Hugging Face API key
 
 # Hugging Face model
 HF_MODEL = "mistralai/Mistral-7B-Instruct"
