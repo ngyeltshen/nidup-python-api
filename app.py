@@ -1,8 +1,12 @@
 import os
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
+
+#enable CORS
+CORS(app)
 
 # Get API keys from environment variables
 GOOGLE_API_KEY = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
