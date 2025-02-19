@@ -6,8 +6,8 @@ import openai
 app = Flask(__name__)
 
 # Get API keys from environment variables
-GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
-SEARCH_ENGINE_ID = os.environ.get("SEARCH_ENGINE_ID")
+GOOGLE_API_KEY = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
+SEARCH_ENGINE_ID = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 def search_google(query):
