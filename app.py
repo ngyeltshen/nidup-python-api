@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Get API keys from environment variables
 GOOGLE_API_KEY = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
 SEARCH_ENGINE_ID = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
-#OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
+OPENAI_API_KEY = os.environ.get("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")
 
 def search_google(query):
     """Search Google using Custom Search API"""
