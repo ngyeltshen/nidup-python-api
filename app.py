@@ -10,7 +10,7 @@ SEARCH_ENGINE_ID = os.environ.get("101ec59658da64424")
 HUGGINGFACE_API_KEY = os.environ.get("HUGGINGFACE_API_KEY")  # Hugging Face API key
 
 # Hugging Face model
-HF_MODEL = "mistralai/Mistral-7B-Instruct"
+HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"
 
 def search_google(query):
     """Search Google using Custom Search API"""
