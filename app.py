@@ -9,8 +9,8 @@ app = Flask(__name__)
 CORS(app)
 
 # Get API keys from environment variables
-GOOGLE_API_KEY = os.environ.get("AIzaSyA8g5TvktDzf86ITyd0Cz7hwTsKebUjTtY")
-SEARCH_ENGINE_ID = os.environ.get("101ec59658da64424")
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
+SEARCH_ENGINE_ID = os.environ.get("SEARCH_ENGINE_ID")
 HUGGINGFACE_API_KEY = os.environ.get("HUGGINGFACE_API_KEY")  # Hugging Face API key
 
 # Hugging Face model
@@ -28,8 +28,8 @@ def search_google(query):
 def generate_ai_response(user_query):
     """Generate response using Hugging Face API"""
     search_content = search_google(user_query)  # Get relevant website content
-   # prompt = f"User asked: {user_query}. Based on extracted info: {search_content}, provide an answer."
-     prompt = f"{user_query} {search_content}"
+    prompt = f"User asked: {user_query}. Based on extracted info: {search_content}, provide an answer."
+    
 
 
     headers = {
