@@ -32,9 +32,9 @@ def generate_ai_response(user_query):
    # prompt = f"{user_query} {search_content}"
 
     if search_content and search_content.strip():
-    prompt = f"Provide an answer based on the following extracted information: {search_content}"
-else:
-    prompt = f"Answer this question: {user_query}"
+        prompt = f"Provide an answer based on the following extracted information: {search_content}"
+    else:
+        prompt = f"Answer this question: {user_query}"
 
 
 
