@@ -15,7 +15,8 @@ HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"  # Or a suitable chat model
 
 def generate_ai_response(user_query):
     """Generate AI response using Hugging Face API."""
-    prompt = f" {user_query}\n\n"
+    #prompt = f" {user_query}\n\n"
+    prompt = user_query
 
     headers = {
         "Authorization": f"Bearer {HUGGINGFACE_API_KEY}",
