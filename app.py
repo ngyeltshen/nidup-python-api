@@ -15,7 +15,7 @@ HF_MODEL = "mistralai/Mistral-7B-Instruct-v0.3"  # Or a suitable chat model
 
 def generate_ai_response(user_query):
     """Generate AI response using Hugging Face API."""
-    prompt = f" {user_query}\n\n"
+    prompt = user_query  # Removed unnecessary formatting to avoid repeating the query
 
     headers = {
         "Authorization": f"Bearer {HUGGINGFACE_API_KEY}",
@@ -64,3 +64,4 @@ def chatbot():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(debug=True, host='0.0.0.0', port=port)
+
